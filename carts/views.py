@@ -21,6 +21,7 @@ def add_cart(request, product_id):
         cart = Cart.objects.create(
             cart_id=_cart_id(request)
         )
+    print(cart)
     cart.save()
 
     try:
@@ -33,6 +34,7 @@ def add_cart(request, product_id):
             quantity=1,
             cart=cart,
         )
+    print(cart_item.product.product_name)
     cart_item.save()
     return redirect('cart')
 
@@ -63,6 +65,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        print(cart_items.count())
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
