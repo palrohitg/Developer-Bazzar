@@ -6,7 +6,13 @@
     <div class="container">
 
         <!-- ============================ COMPONENT 1 ================================= -->
-
+        {% if not cart_items %}
+        <h2 class="text-center">Your Shopping Cart is Empty</h2>
+        <br>
+        <div class="text-center">
+            <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
+        </div>
+        {% else %}
         <div class="row">
             <aside class="col-lg-9">
                 <div class="card">
@@ -27,7 +33,8 @@
                                         <div class="aside"><img src="{{ cart_item.product.image.url }}" class="img-sm">
                                         </div>
                                         <figcaption class="info">
-                                            <a href="#" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                            <a href="{{ cart_item.product.get_url }}" class="title text-dark">
+                                                {{ cart_item.product.product_name }}</a>
                                             <p class="text-muted small">Color: 25 Mpx <br> Size: Canon</p>
                                         </figcaption>
                                     </figure>
@@ -88,10 +95,10 @@
                             <img src="{% static './images/misc/payments.png' %}" height="26">
                         </p>
                         <a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
-                        <a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+                        <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
                     </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
-
+                {% endif %}
             </aside> <!-- col.// -->
 
 
