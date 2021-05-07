@@ -13,6 +13,11 @@ def _cart_id(request):
 
 
 def add_cart(request, product_id):
+    color = request.GET['color']
+    size = request.GET['size']
+    return HttpResponse(color + ' ' + size)
+    exit(0)
+
     product = Product.objects.get(id=product_id)
     try:
         """Get the Session id"""
