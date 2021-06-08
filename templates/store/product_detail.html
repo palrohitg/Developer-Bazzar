@@ -34,10 +34,12 @@
                             <div class="row">
                                 <div class="item-option-select">
                                     <h6>Choose Color</h6>
-                                    <select name="color" class="form-control">
-                                        <option value="red">Red</option>
-                                        <option value="yellow">Yellow</option>
-                                        <option value="green">green</option>
+                                    <select name="color" class="form-control" required>
+                                        <option value="" disabled selected>Select</option>
+                                        {% for i in single_product.variation_set.colors %}
+                                        <option value="{{ i.variation_value }}">{{ i.variation_value | capfirst }}
+                                        </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div> <!-- row.// -->
@@ -45,10 +47,12 @@
                                 <div class="item-option-select">
                                     <h6>Select Size</h6>
                                     <div class="item-option-select">
-                                        <select name="size" class="form-control">
-                                            <option value="small">Small</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
+                                        <select name="color" class="form-control" required>
+                                            <option value="" disabled selected>Select</option>
+                                            {% for i in single_product.variation_set.sizes %}
+                                            <option value="{{ i.variation_value | lower }}">
+                                                {{ i.variation_value | capfirst }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>

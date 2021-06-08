@@ -28,7 +28,10 @@ def add_cart(request, product_id):
                 pass
 
     try:
-        """Get the Session id"""
+        """
+        Creating Session id to add the product 
+        to Cart 
+        """
         cart = Cart.objects.get(cart_id=_cart_id(request))
     except Cart.DoesNotExist:
         cart = Cart.objects.create(
@@ -38,7 +41,7 @@ def add_cart(request, product_id):
 
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
-        if len(product_variation == 0):
+        if len(product_variation) == 0:
             for item in product_variation:
                 cart_item.variation.add(item)
         cart_item.quantity += 1
@@ -49,7 +52,7 @@ def add_cart(request, product_id):
             quantity=1,
             cart=cart,
         )
-        if len(product_variation == 0):
+        if len(product_variation) == 0:
             for item in product_variation:
                 cart_item.variation.add(item)
 
