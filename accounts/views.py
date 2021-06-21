@@ -3,7 +3,7 @@ from .forms import RegistrationForm
 from .models import Account
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-
+from django.http import HttpResponse
 # Verification email
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -40,8 +40,10 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            # messages.success(request, 'Thank you for registering with us. We have sent you a verification email to your email address [rathan.kumar@gmail.com]. Please verify it.')
-            return redirect('/accounts/login/?command=verification&email='+email)
+            messages.success(
+                request, "Thank you for registering with us. We have sent you a verification email to your email address {}. Please verify it.".format(email))
+            return redirect('register')
+            # return redirect('/accounts/login/?command=verification&email='+email)
     else:
         form = RegistrationForm()
     context = {
@@ -52,6 +54,9 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
+        """
+            Get the email and password 
+        """
         email = request.POST['email']
         password = request.POST['password']
 
