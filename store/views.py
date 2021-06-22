@@ -13,6 +13,9 @@ def store(request, category_slug=None):
     products = None
 
     if category_slug != None:
+        '''
+        page product when user click on category 
+        '''
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.all().filter(category=categories, is_available=True)
         paginator = Paginator(products, 3)
@@ -20,6 +23,9 @@ def store(request, category_slug=None):
         paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
+        '''
+        showing product when user click on store 
+        '''
         products = Product.objects.all().filter(is_available=True).order_by('id')
         paginator = Paginator(products, 3)
         page = request.GET.get('page')
