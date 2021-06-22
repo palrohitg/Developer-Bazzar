@@ -66,11 +66,16 @@ def login(request):
 
         if user is not None:
             try:
+                """
+                If users has some cartitem before login
+                just assign the card items to users 
+                """
                 cart = Cart.objects.get(cart_id=_cart_id(request))
                 is_cart_item_exists = CartItem.objects.filter(
-                    cart=cart).exists()
+                    cart=cart).exists()  # check if exists somethings
                 if is_cart_item_exists:
-                    cart_item = CartItem.objects.filter(cart=cart)
+                    cart_item = CartItem.objects.filter(
+                        cart=cart)  # fetching all the cartitems
 
                     for item in cart_item:
                         item.user = user
