@@ -16,3 +16,9 @@ AKIAVLS7J7IK3NVZOT4R
 Installing Django Application on EC2 
 ===================================================================== 
 1. 
+
+
+
+
+# django shells tests apps : 
+https://medium.com/@ksarthak4ever/django-models-and-shell-8c48963d83a3

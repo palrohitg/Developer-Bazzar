@@ -3,6 +3,7 @@ from .models import Account
 
 
 class RegistrationForm(forms.ModelForm):
+    # adding extra fields to django forms
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Enter Password',
         'class': 'form-control',
@@ -13,7 +14,8 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
+        fields = ['first_name', 'last_name',
+                  'phone_number', 'email', 'password']
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()

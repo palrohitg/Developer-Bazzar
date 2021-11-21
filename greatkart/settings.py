@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
+# from middleware.custom_middleware import CountRequestsMiddleware
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = ['django-env.eba-y4ew2fdp.us-west-2.elasticbeanstalk.com', '*']
 
 
 # Application definition
+print("Inside the text files")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
+    'test_app',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'greatkart.custom_middleware.CountRequestsMiddleware',
 ]
 
+print("Inside the text files 2")
 ROOT_URLCONF = 'greatkart.urls'
 
 TEMPLATES = [
