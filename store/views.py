@@ -17,11 +17,9 @@ def store(request, category_slug=None):
     products = None
 
     if category_slug != None:
+       
         categories = get_object_or_404(Category, slug=category_slug)
-        print(categories)
-        products = Product.objects.filter(
-            category=categories, is_available=True)
-        print(products)
+        products = Product.objects.filter(category=categories, is_available=True)
         paginator = Paginator(products, 1)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
@@ -43,6 +41,8 @@ def store(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
     try:
         # get always return the single objects values
+        # __ refer to fields associated with the foreign key for the next pages
+        # here catgory is product fields but category is the f`orign key which has slug fileds
         single_product = Product.objects.get(
             category__slug=category_slug, slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(
@@ -87,11 +87,14 @@ def search(request):
 
 
 def submit_review(request, product_id):
+    
     url = request.META.get('HTTP_REFERER')
+
     if request.method == 'POST':
         try:
-            reviews = ReviewRating.objects.get(
-                user__id=request.user.id, product__id=product_id)
+            # If review is already posted by the same user
+            # Then update the reviews
+            reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
             messages.success(

@@ -27,6 +27,12 @@ def register(request):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             phone_number = form.cleaned_data['phone_number']
+
+            # todo: add the validation check for emails 
+            # todo: add the validation check for phone number 
+            # todo: add the validation check for firstname if contains the number and anythings specials character then send
+            # alert to the user
+
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
@@ -53,7 +59,6 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            print("sfsd")
             # messages.success(request, 'Thank you for registering with us)
             return redirect('/accounts/login/?command=verification&email='+email)
     else:

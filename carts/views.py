@@ -16,10 +16,14 @@ def _cart_id(request):
 def add_cart(request, product_id):
     current_user = request.user
     product = Product.objects.get(id=product_id) #get the product
-    # If the user is authenticated
+  
     if current_user.is_authenticated:
         product_variation = []
         if request.method == 'POST':
+            """
+                We are getting colours,size as the key and values
+                filter out based upon the key and values we are getting 
+            """
             for item in request.POST:
                 key = item
                 value = request.POST[key]
@@ -162,13 +166,22 @@ def remove_cart_item(request, product_id, cart_item_id):
 
 
 def cart(request, total=0, quantity=0, cart_items=None):
+    """
+        - Cart is the current session of the users 
+        - we will filter all cartitem of the objects
+        - if the user is not authenticated : 
+            - then create a card id 
+            - filter all the caritem based on the cart id 
+        - if the user is authenticated:
+            - Then filter all the cartItems api for
+    """
     try:
         tax = 0
         grand_total = 0
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
-            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart = Cart.objects.get(cart_id=_cart_id(request)) # cart isthe current session of the users
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)

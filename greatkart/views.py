@@ -10,7 +10,7 @@ def home(request):
         - single objects is present in the code then directly pass those values
     """
     products = Product.objects.all().filter(is_available=True)
-    print(products.query)
+
     context = {
         'products': products,
     }

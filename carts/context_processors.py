@@ -8,7 +8,11 @@ def counter(request):
         return {}
     else:
         try:
+            # Not based on the session / cart id 
             cart = Cart.objects.filter(cart_id=_cart_id(request))
+
+            # if the user is logged in then give the 
+            # count the cartitem assigned to that users 
             if request.user.is_authenticated:
                 cart_items = CartItem.objects.all().filter(user=request.user)
             else:

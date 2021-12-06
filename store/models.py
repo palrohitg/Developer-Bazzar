@@ -50,6 +50,11 @@ class Product(models.Model):
 
 
 class VariationManager(models.Manager):
+    """
+        Queryset to filter out the records based on
+        colors, sizes
+    """
+
     def colors(self):
         return super(VariationManager, self).filter(variation_category='color', is_active=True)
 

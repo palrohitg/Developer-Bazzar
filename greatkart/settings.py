@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['django-env.eba-y4ew2fdp.us-west-2.elasticbeanstalk.com', '*']
 
 
 # Application definition
-print("Inside the text files")
+# print("Inside the text files")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
-    'test_app',
+    "core", 
+
 ]
 
 MIDDLEWARE = [
@@ -58,10 +59,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'greatkart.custom_middleware.CountRequestsMiddleware',
 ]
 
-print("Inside the text files 2")
+# print("Inside the text files 2")
 ROOT_URLCONF = 'greatkart.urls'
 
 TEMPLATES = [
@@ -156,3 +156,4 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+
