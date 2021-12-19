@@ -16,7 +16,8 @@
                     </header>
                     <div class="card-body">
                         <div class="text-right">
-                            <img src="{{ user_profile.profile_pictures.url }}" alt="Profile Picture" width="100%" style="border-radius:50px;">
+                            <!-- When we put the files and other sources then entype mutlipart is required-->
+                            <img src="{{ user_profile.profile_pictures.url }}" alt="Profile Picture" width="100%" style="max-height:75px;width:130px;">
                         </div>
                         <div class="row">
                             <div class="col-md-12">
