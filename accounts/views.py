@@ -29,6 +29,9 @@ def register(request):
             last_name = form.cleaned_data['last_name']
             phone_number = form.cleaned_data['phone_number']
 
+            if len(phone_number) != 10:
+                messages.error(request, 'Password Must Be at least 10 digits')
+                return redirect('/accounts/register')
             # todo: add the validation check for emails 
             # todo: add the validation check for phone number 
             # todo: add the validation check for firstname if contains the number and anythings specials character then send

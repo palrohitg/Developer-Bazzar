@@ -27,6 +27,11 @@ class RegistrationForm(forms.ModelForm):
                 "Password does not match!"
             )
 
+        if password == confirm_password and len(password) < 6:
+            raise forms.ValidationError(
+                "Password must be at least 6 characters"
+            )
+
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs['placeholder'] = 'Enter First Name'
